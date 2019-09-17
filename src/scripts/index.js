@@ -4,7 +4,6 @@ const squareLength = 40;
 const squareSpace = squareLength + 1;
 const ctx = document.getElementById('grid').getContext('2d');
 
-//hi
 initialiseGrid();
 drawStartSquare();
 drawEndSquare();
