@@ -1,33 +1,24 @@
 package app.controller;
 
-import app.User;
 import app.models.Board;
-import app.models.Point;
+import app.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class BoardController {
 
+  private final BoardService boardService;
+
+  @Autowired
+  public BoardController(BoardService boardService){
+    this.boardService = boardService;
+  }
+
     @GetMapping("/board")
     public Board getBoard(){
         System.out.println("Hi *****");
-        return buildBoard();
-    }
-
-    public Board buildBoard(){
-        List<Point> points = new ArrayList<>();
-
-        for(int i = 0; i < 10; i ++){
-            for (int j = 0; j < 10; j++){
-                Point point = new Point(i, j, false);
-                points.add(point);
-            }
-        }
-
-        return new Board(points);
+        return boardService.buildBoard();
     }
 }
