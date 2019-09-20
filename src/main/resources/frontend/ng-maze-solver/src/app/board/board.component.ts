@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {BoardService} from "../service/board-service.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Colour} from "../model/colour";
+import {BoardService} from '../service/board-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Colour} from '../model/colour';
 
 @Component({
   selector: 'app-board',
@@ -39,9 +39,9 @@ export class BoardComponent implements OnInit {
   }
 
   initialiseGrid(data: any) {
-    this.ctx.fillStyle = "rgb(" + this.BACKGROUND.r + "," + this.BACKGROUND.g + "," + this.BACKGROUND.b + ")";
+    this.ctx.fillStyle = 'rgb(' + this.BACKGROUND.r + ',' + this.BACKGROUND.g + ',' + this.BACKGROUND.b + ')';
 
-    let points = data.points;
+    const points = data.points;
 
     points.forEach((point) => {
       this.ctx.fillRect(point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE, this.SQUARE_LENGTH, this.SQUARE_LENGTH);
