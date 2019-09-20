@@ -21,8 +21,8 @@ public class BoardController {
     public Board buildBoard(){
         List<Point> points = new ArrayList<>();
 
-        for(int i = 0; i < 7; i ++){
-            for (int j = 0; j < 7; j++){
+        for(int i = 0; i < 10; i ++){
+            for (int j = 0; j < 10; j++){
                 Point point = new Point(i, j, false);
                 points.add(point);
             }
