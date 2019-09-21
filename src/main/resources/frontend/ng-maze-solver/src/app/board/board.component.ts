@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BoardService} from '../service/board-service.service';
-import {Router} from '@angular/router';
 import {Colour} from '../model/colour';
 
 @Component({
