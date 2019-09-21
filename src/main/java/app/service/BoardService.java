@@ -19,6 +19,28 @@ public class BoardService {
             }
         }
 
+        applyWalls(points);
+        applyStartAndEnd(points);
+
         return new Board(points);
+    }
+
+    private void applyStartAndEnd(List<Point> points) {
+        points.forEach(point -> {
+            if (!point.isWall() && point.getX() == 0 && point.getY() == 0) {
+                point.setStart(true);
+            }
+            else if(!point.isWall() && point.getY() == 0 && point.getX() == Math.sqrt(points.size()) - 1){
+                point.setFinish(true);
+            }
+        });
+    }
+
+    private void applyWalls(List<Point> points) {
+        points.forEach(point -> {
+            if (point.getX() == 3 && point.getY() > Math.sqrt(points.size()) - 6) {
+                point.setWall(true);
+            }
+        });
     }
 }

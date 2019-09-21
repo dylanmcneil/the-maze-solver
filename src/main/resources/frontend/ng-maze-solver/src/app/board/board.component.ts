@@ -16,11 +16,14 @@ export class BoardComponent implements OnInit {
 
   private readonly SQUARE_LENGTH = 40;
   private readonly SQUARE_SPACE = this.SQUARE_LENGTH + 1;
-  private readonly BACKGROUND = new Colour(100, 100, 100);
-  private readonly STARTX = 0;
-  private readonly STARTY = 0;
-  private readonly ENDX = 6;
-  private readonly ENDY = 4;
+  private readonly BACKGROUND_COLOUR = new Colour(100, 100, 100);
+  private readonly WALL_COLOUR = new Colour(0, 0, 0);
+  private readonly START_COLOUR = new Colour(0, 255, 0);
+  private readonly END_COLOUR = new Colour(0, 0, 255);
+  private readonly START_X = 0;
+  private readonly START_Y = 1;
+  private readonly END_X = 6;
+  private readonly END_Y = 4;
   private readonly WIDTH = 7;
   private readonly HEIGHT = 7;
 
@@ -38,30 +41,32 @@ export class BoardComponent implements OnInit {
       this.initialiseGrid(data);
 
       this.colourSurrounding(4, 4);
-      this.drawLine(this.STARTX, this.STARTY, this.ENDX, this.ENDY);
+      this.drawLine(this.START_X, this.START_Y, this.END_X, this.END_Y);
       this.colourPath();
-      this.drawStartSquare(this.STARTX, this.STARTY);
-      this.drawEndSquare(this.ENDX, this.ENDY);
     });
   }
 
   private initialiseGrid(data: any): void {
     data.points.forEach((point) => {
-      this.drawSquare(point.x, point.y, new Colour(this.BACKGROUND.r, this.BACKGROUND.g, this.BACKGROUND.b));
+      this.drawSquare(point.x, point.y, this.calculateTileColour(point));
     });
+  }
+
+  private calculateTileColour(point: any): Colour {
+    if (point.wall) {
+      return this.WALL_COLOUR;
+    } else if (point.start) {
+      return this.START_COLOUR;
+    } else if (point.finish) {
+      return this.END_COLOUR;
+    } else {
+      return this.BACKGROUND_COLOUR;
+    }
   }
 
   private drawSquare(logicalX: number, logicalY: number, c: Colour): void {
     this.ctx.fillStyle = 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
     this.ctx.fillRect(logicalX * this.SQUARE_SPACE, logicalY * this.SQUARE_SPACE, this.SQUARE_LENGTH, this.SQUARE_LENGTH);
-  }
-
-  private drawStartSquare(logicalX: number, logicalY: number): void {
-    this.drawSquare(logicalX, logicalY, new Colour(0, 255, 0));
-  }
-
-  private drawEndSquare(logicalX: number, logicalY: number): void {
-    this.drawSquare(logicalX, logicalY, new Colour(0, 0, 255));
   }
 
   private drawLine(logicalStartX, logicalStartY, endStartX, endStartY): void {
@@ -151,13 +156,13 @@ export class BoardComponent implements OnInit {
     for (let i = 0; i < adj.length; i++) { // Loops through N,E,S,W
       let check = 0;
 
-      if (adj[i].r === this.BACKGROUND.r) {
+      if (adj[i].r === this.BACKGROUND_COLOUR.r) {
         check++;
       }
-      if (adj[i].g === this.BACKGROUND.g) {
+      if (adj[i].g === this.BACKGROUND_COLOUR.g) {
         check++;
       }
-      if (adj[i].b === this.BACKGROUND.b) {
+      if (adj[i].b === this.BACKGROUND_COLOUR.b) {
         check++;
       }
 
@@ -176,7 +181,7 @@ export class BoardComponent implements OnInit {
       for (let y = 0, j = 0; j < this.HEIGHT; y += this.SQUARE_SPACE, j++) {
         const avg = this.findAvgColour(i, j);
         // not sure how to directly compare two arrays in an if statement so just done element by element :/
-        if (avg.r !== this.BACKGROUND.r && avg.g !== this.BACKGROUND.g && avg.b !== this.BACKGROUND.b &&
+        if (avg.r !== this.BACKGROUND_COLOUR.r && avg.g !== this.BACKGROUND_COLOUR.g && avg.b !== this.BACKGROUND_COLOUR.b &&
           avg.r !== 255 && avg.g !== 0 && avg.b !== 0) {
           this.drawSquare(i, j, new Colour(255, 160, 0));
         }

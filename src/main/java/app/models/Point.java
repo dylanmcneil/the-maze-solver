@@ -4,6 +4,8 @@ public class Point {
     private int x;
     private int y;
     private boolean isWall;
+    private boolean isStart;
+    private boolean isFinish;
 
     public Point(int x, int y, boolean isWall) {
         this.x = x;
@@ -33,5 +35,21 @@ public class Point {
 
     public void setWall(boolean wall) {
         isWall = wall;
+    }
+
+    public boolean isStart() {
+        return isStart;
+    }
+
+    public void setStart(boolean start) {
+        isStart = start;
+    }
+
+    public boolean isFinish() {
+        return isFinish;
+    }
+
+    public void setFinish(boolean finish) {
+        isFinish = finish;
     }
 }
