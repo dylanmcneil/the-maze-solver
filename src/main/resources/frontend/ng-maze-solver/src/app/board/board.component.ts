@@ -110,33 +110,34 @@ export class BoardComponent implements OnInit {
     return new Colour(sumR / arrayR.length, sumG / arrayG.length, sumB / arrayB.length);
   }
 
-  private detectAdjacent(x, y): Colour[] {  // Returns colour of adjacent squares [N,E,S,W], remember y axis is flipped (-ve is up)
+  // Returns colour of adjacent squares [N,E,S,W], remember y axis is flipped (-ve is up)
+  private detectAdjacent(logicalX, logicalY): Colour[] {
     const adjacent = [];         // 2d array, each direction contains rgb value [N[r,b,g] , S[r,g,b] , etc....
 
     // North
-    if (y > 0) {
-      adjacent[0] = this.findAvgColour(x, y - 1);
+    if (logicalY > 0) {
+      adjacent[0] = this.findAvgColour(logicalX, logicalY - 1);
     } else {
       adjacent[0] = null;
     }
 
     // East
-    if (x < this.WIDTH) {
-      adjacent[1] = this.findAvgColour(x + 1, y);
+    if (logicalX < this.WIDTH) {
+      adjacent[1] = this.findAvgColour(logicalX + 1, logicalY);
     } else {
       adjacent[1] = null;
     }
 
     // South
-    if (y < this.HEIGHT) {
-      adjacent[2] = this.findAvgColour(x, y + 1);
+    if (logicalY < this.HEIGHT) {
+      adjacent[2] = this.findAvgColour(logicalX, logicalY + 1);
     } else {
       adjacent[2] = null;
     }
 
     // West
-    if (x > 0) {
-      adjacent[3] = this.findAvgColour(x - 1, y);
+    if (logicalX > 0) {
+      adjacent[3] = this.findAvgColour(logicalX - 1, logicalY);
     } else {
       adjacent[3] = null;
     }
