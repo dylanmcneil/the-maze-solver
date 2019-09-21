@@ -12,13 +12,13 @@ public class BoardController {
   private final BoardService boardService;
 
   @Autowired
-  public BoardController(BoardService boardService){
+  public BoardController(BoardService boardService) {
     this.boardService = boardService;
   }
 
-    @GetMapping("/board")
-    public Board getBoard(){
-        System.out.println("Hi *****");
-        return boardService.buildBoard();
-    }
+  @GetMapping("/board")
+  public Board getBoard() {
+    System.out.println("<<<<< Getting board >>>>>");
+    return boardService.buildBoard(10);
+  }
 }

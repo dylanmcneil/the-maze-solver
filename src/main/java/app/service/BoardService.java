@@ -9,16 +9,16 @@ import java.util.List;
 
 @Component
 public class BoardService {
-    public Board buildBoard(){
-      List<Point> points = new ArrayList<>();
+    public Board buildBoard(int squareLength) {
+        List<Point> points = new ArrayList<>();
 
-      for(int i = 0; i < 10; i ++){
-        for (int j = 0; j < 10; j++){
-          Point point = new Point(i, j, false);
-          points.add(point);
+        for (int i = 0; i < squareLength; i++) {
+            for (int j = 0; j < squareLength; j++) {
+                Point point = new Point(i, j, false);
+                points.add(point);
+            }
         }
-      }
 
-      return new Board(points);
+        return new Board(points);
     }
 }
