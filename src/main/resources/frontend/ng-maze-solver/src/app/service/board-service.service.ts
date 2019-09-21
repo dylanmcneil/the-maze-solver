@@ -12,7 +12,7 @@ export class BoardService {
     this.usersUrl = 'http://localhost:8080/board';
   }
 
-  public getBoard(): Observable<Object> {
-    return this.http.get<Object>(this.usersUrl);
+  public getBoard(): Observable<object> {
+    return this.http.get<object>(this.usersUrl);
   }
 }
