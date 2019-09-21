@@ -1,5 +1,7 @@
-package app;
+package app.controller;
 
+import app.repository.UserRepository;
+import app.models.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -7,8 +9,6 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-
-    // standard constructors
     private final UserRepository userRepository;
 
     public UserController(UserRepository userRepository) {

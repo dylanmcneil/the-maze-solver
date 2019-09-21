@@ -38,7 +38,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  initialiseGrid(data: any) {
+  private initialiseGrid(data: any) {
     this.ctx.fillStyle = 'rgb(' + this.BACKGROUND.r + ',' + this.BACKGROUND.g + ',' + this.BACKGROUND.b + ')';
 
     const points = data.points;

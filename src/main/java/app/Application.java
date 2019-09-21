@@ -1,5 +1,7 @@
 package app;
 
+import app.models.User;
+import app.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

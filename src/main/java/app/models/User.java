@@ -1,4 +1,4 @@
-package app;
+package app.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +48,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "app.User{" +
+        return "app.models.User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
