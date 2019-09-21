@@ -11,7 +11,7 @@ import {Colour} from '../model/colour';
 export class BoardComponent implements OnInit {
 
   @ViewChild('grid', {static: true})
-  canvas: ElementRef<HTMLCanvasElement>;
+  private canvas: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D;
 
@@ -25,7 +25,7 @@ export class BoardComponent implements OnInit {
   private readonly WIDTH = 7;
   private readonly HEIGHT = 7;
 
-  constructor(private boardService: BoardService, private router: Router) {
+  constructor(private boardService: BoardService) {
 
   }
 
@@ -47,22 +47,14 @@ export class BoardComponent implements OnInit {
   }
 
   private initialiseGrid(data: any): void {
-    this.ctx.fillStyle = 'rgb(' + this.BACKGROUND.r + ',' + this.BACKGROUND.g + ',' + this.BACKGROUND.b + ')';
-
-    const points = data.points;
-
-    points.forEach((point) => {
-      this.ctx.fillRect(point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE, this.SQUARE_LENGTH, this.SQUARE_LENGTH);
+    data.points.forEach((point) => {
+      this.drawSquare(point.x, point.y, new Colour(this.BACKGROUND.r, this.BACKGROUND.g, this.BACKGROUND.b));
     });
   }
 
   private drawSquare(logicalX: number, logicalY: number, c: Colour): void {
     this.ctx.fillStyle = 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
-
-    const pixelX = logicalX * this.SQUARE_SPACE;
-    const pixelY = logicalY * this.SQUARE_SPACE;
-
-    this.ctx.fillRect(pixelX, pixelY, this.SQUARE_LENGTH, this.SQUARE_LENGTH);
+    this.ctx.fillRect(logicalX * this.SQUARE_SPACE, logicalY * this.SQUARE_SPACE, this.SQUARE_LENGTH, this.SQUARE_LENGTH);
   }
 
   private drawStartSquare(logicalX: number, logicalY: number): void {
@@ -191,5 +183,4 @@ export class BoardComponent implements OnInit {
       }
     }
   }
-
 }
