@@ -4,4 +4,6 @@
   <mat-progress-spinner [mode]="'indeterminate'">
   </mat-progress-spinner>
 </div>
-<canvas #grid width=2000 height=2000></canvas>
+<canvas #grid></canvas>
+
+<p *ngIf="board">The calculated path is {{board.optimalPath.length}} tiles long (including start and end)</p>

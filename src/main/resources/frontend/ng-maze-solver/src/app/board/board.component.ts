@@ -28,6 +28,8 @@ export class BoardComponent implements OnInit {
   private readonly WIDTH = 7;
   private readonly HEIGHT = 7;
 
+  private board: any;
+
   constructor(private boardService: BoardService) {
 
   }
@@ -36,13 +38,18 @@ export class BoardComponent implements OnInit {
     this.loading = true;
     this.ctx = this.canvas.nativeElement.getContext('2d');
 
-    // wait for the data to return from the HTTP call, then execute the listed functions
-    this.boardService.getBoard().subscribe(data => {
+    // Code executes once HTTP call successfully completes from back-end
+    this.boardService.getBoard().subscribe(response => {
+      this.board = response;
+
+      this.canvas.nativeElement.width = Math.sqrt(this.board.points.length) * this.SQUARE_SPACE;
+      this.canvas.nativeElement.height = Math.sqrt(this.board.points.length) * this.SQUARE_SPACE;
+
       this.loading = false;
-      console.log('response from backend: ', data);
-      // main
-      this.initialiseGrid(data);
-      this.colourOptimalPath(data);
+      console.log('response from backend: ', this.board);
+
+      this.initialiseGrid(this.board);
+      this.colourOptimalPath(this.board);
       // this.colourSurrounding(4, 4);
       // this.drawLine(this.START_X, this.START_Y, this.END_X, this.END_Y);
       // this.colourPath();
