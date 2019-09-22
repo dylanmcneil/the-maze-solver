@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   private canvas: ElementRef<HTMLCanvasElement>;
 
   private ctx: CanvasRenderingContext2D;
+  private loading: boolean;
 
   private readonly SQUARE_LENGTH = 40;
   private readonly SQUARE_SPACE = this.SQUARE_LENGTH + 1;
@@ -32,10 +33,12 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.ctx = this.canvas.nativeElement.getContext('2d');
 
     // wait for the data to return from the HTTP call, then execute the listed functions
     this.boardService.getBoard().subscribe(data => {
+      this.loading = false;
       console.log('response from backend: ', data);
       // main
       this.initialiseGrid(data);

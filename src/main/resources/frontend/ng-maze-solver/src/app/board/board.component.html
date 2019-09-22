@@ -1,3 +1,7 @@
 <h1>The Maze</h1>
 
+<div class="progress-loader" [hidden]="!loading">
+  <mat-progress-spinner [mode]="'indeterminate'">
+  </mat-progress-spinner>
+</div>
 <canvas #grid width=2000 height=2000></canvas>
