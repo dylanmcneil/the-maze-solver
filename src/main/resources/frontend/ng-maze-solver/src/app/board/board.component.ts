@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   private loading: boolean;
 
-  private readonly SQUARE_LENGTH = 40;
+  private readonly SQUARE_LENGTH = 50;
   private readonly SQUARE_SPACE = this.SQUARE_LENGTH + 1;
   private readonly BACKGROUND_COLOUR = new Colour(100, 100, 100);
   private readonly WALL_COLOUR = new Colour(0, 0, 0);
