@@ -56,13 +56,19 @@ export class BoardComponent implements OnInit {
   }
 
   private colourOptimalPath(data: any): void {
-    const interval = 250;
+    const interval = 100;
     let promise = Promise.resolve();
     let colour = 50;
+
+    // Sequentially draw the optimal path
     data.optimalPath.forEach((point, index) => {
       promise = promise.then(() => {
         if (!(point.start || point.finish)) {
-          this.drawSquare(point.x, point.y, new Colour(0, colour, colour));
+          const currentColour = new Colour(0, colour, colour);
+          this.drawSquare(point.x, point.y, currentColour);
+
+          this.ctx.fillStyle = 'rgb(255, 255, 255)';
+          this.ctx.fillText(index, point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE + 10);
           colour += 10;
         }
         return new Promise((resolve) => {
