@@ -66,11 +66,12 @@ export class BoardComponent implements OnInit {
         if (!(point.start || point.finish)) {
           const currentColour = new Colour(0, colour, colour);
           this.drawSquare(point.x, point.y, currentColour);
-
-          this.ctx.fillStyle = 'rgb(255, 255, 255)';
-          this.ctx.fillText(index, point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE + 10);
           colour += 10;
         }
+
+        this.ctx.fillStyle = 'rgb(255, 255, 255)';
+        this.ctx.fillText(index, point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE + 10);
+
         return new Promise((resolve) => {
           setTimeout(resolve, interval);
         });
