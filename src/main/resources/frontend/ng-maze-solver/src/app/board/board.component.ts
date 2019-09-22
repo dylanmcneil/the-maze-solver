@@ -39,16 +39,33 @@ export class BoardComponent implements OnInit {
       console.log('response from backend: ', data);
       // main
       this.initialiseGrid(data);
-
-      this.colourSurrounding(4, 4);
-      this.drawLine(this.START_X, this.START_Y, this.END_X, this.END_Y);
-      this.colourPath();
+      this.colourOptimalPath(data);
+      // this.colourSurrounding(4, 4);
+      // this.drawLine(this.START_X, this.START_Y, this.END_X, this.END_Y);
+      // this.colourPath();
     });
   }
 
   private initialiseGrid(data: any): void {
     data.points.forEach((point) => {
       this.drawSquare(point.x, point.y, this.calculateTileColour(point));
+    });
+  }
+
+  private colourOptimalPath(data: any): void {
+    const interval = 250;
+    let promise = Promise.resolve();
+    let colour = 50;
+    data.optimalPath.forEach((point, index) => {
+      promise = promise.then(() => {
+        if (!(point.start || point.finish)) {
+          this.drawSquare(point.x, point.y, new Colour(0, colour, colour));
+          colour += 10;
+        }
+        return new Promise((resolve) => {
+          setTimeout(resolve, interval);
+        });
+      });
     });
   }
 
