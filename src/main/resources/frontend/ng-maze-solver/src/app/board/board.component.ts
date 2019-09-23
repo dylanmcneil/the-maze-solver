@@ -70,12 +70,15 @@ export class BoardComponent implements OnInit {
     // Sequentially draw the optimal path
     data.optimalPath.forEach((point, index) => {
       promise = promise.then(() => {
+
+        // Draw the optimal path square
         if (!(point.start || point.finish)) {
           const currentColour = new Colour(0, colour, colour);
           this.drawSquare(point.x, point.y, currentColour);
           colour += 10;
         }
 
+        // Draw the number
         this.ctx.fillStyle = 'rgb(255, 255, 255)';
         this.ctx.fillText(index, point.x * this.SQUARE_SPACE, point.y * this.SQUARE_SPACE + 10);
 

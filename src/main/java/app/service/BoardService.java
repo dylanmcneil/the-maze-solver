@@ -12,6 +12,7 @@ public class BoardService {
     public Board buildBoard(int squareLength) {
         List<Point> points = new ArrayList<>();
 
+        //Build square
         for (int i = 0; i < squareLength; i++) {
             for (int j = 0; j < squareLength; j++) {
                 Point point = new Point(i, j, false);
